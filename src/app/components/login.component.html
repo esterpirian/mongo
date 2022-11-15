@@ -1,0 +1,42 @@
+
+
+
+<mat-accordion *ngIf="(coord$ |async)?.hourly">
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          מזג האויר היום
+        </mat-panel-title>
+        <mat-panel-description>
+          לחץ לצפייה
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <spart-table [data]="getData((coord$ |async)?.current)"></spart-table>
+    </mat-expansion-panel>
+    <mat-expansion-panel   (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         Hourly
+        </mat-panel-title>
+        <mat-panel-description >
+         לחץ לצפייה לפי שעה 
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <spart-table [data]="wh.getData((coord$ |async)?.hourly)"></spart-table>
+    </mat-expansion-panel>
+    <mat-expansion-panel   (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+Hourly
+</mat-panel-title>
+<mat-panel-description >
+לחץ לצפייה לפי יום 
+</mat-panel-description>
+</mat-expansion-panel-header>
+
+<spart-table [data]="wh.getData((coord$ |async)?.daily)"></spart-table>
+</mat-expansion-panel>
+  </mat-accordion>

@@ -1,0 +1,49 @@
+<mat-form-field appearance="fill" >
+  <mat-label>בחר עיר</mat-label>
+  <mat-select [(ngModel)]="selectedValue" name="city" (valueChange)="selectCity($event)">
+    <mat-option *ngFor="let city of cities" [value]="city">
+      {{city}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-accordion *ngIf="(city$ |async)?.base">
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        מידע על העיר
+      </mat-panel-title>
+      <mat-panel-description>
+        לחץ לצפייה
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <spart-table [data]="wh.getData((city$ |async)?.weather)"></spart-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel   (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       מזג האויר
+      </mat-panel-title>
+      <mat-panel-description >
+       לחץ לצפייה  
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+<br>
+   
+    <spart-table [data]="getData((city$ |async)||undefined)"></spart-table>
+  </mat-expansion-panel>
+  <mat-expansion-panel   (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+מהירות הרוח
+</mat-panel-title>
+<mat-panel-description >
+לחץ לצפייה  
+</mat-panel-description>
+</mat-expansion-panel-header>
+
+<spart-table [data]="wh.getData([(city$ |async)?.wind])"></spart-table>
+</mat-expansion-panel>
+</mat-accordion>

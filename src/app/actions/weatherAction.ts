@@ -1,0 +1,10 @@
+import { createAction, props } from '@ngrx/store';
+import { cityReq,RootObjCity } from '../interfaces/cityWeather';
+import { coordReq,RootObject,Header,Table } from '../interfaces/coordWeather';
+export const SineIn = createAction('[weather] Sign In');
+export const GetRepByCoord = createAction('[weather] GetRepByCoord', props<{ payload: coordReq,urlGet:string}>());
+export const GetRepByCity = createAction('[weather] GetRepByCity', props<{ payload: cityReq,urlGet:string}>());
+export const SetRepByCoord = createAction('[weather] SetRepByCoord', props<{ payload: RootObject}>());
+export const SetRepByCity = createAction('[weather] SetRepByCity', props<{ payload: RootObjCity}>());
+export const createTable = createAction('[weather] createTable', props<{ payload: Table}>());
+export const createHeader = createAction('[weather] createHeader', props<{ payload: Header}>());
